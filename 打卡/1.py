@@ -1,4 +1,9 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
 
 url = 'https://www.wjx.cn/vj/exuVsAI.aspx'
 
@@ -20,6 +25,7 @@ user_name = "胡澳治"
 user_num = "201900800510"
 user_house = "江西省九江市修水县万象新城B区1301"
 user_tmp = '36.5'
+user_speciality = "19计算机科学"
 user_name_input = browser.find_element_by_id("q1")
 user_name_input.send_keys(user_name)
 
@@ -27,8 +33,8 @@ user_num_input = browser.find_element_by_id("q2")
 user_num_input.send_keys(user_num)
 
 user_speciality_radio = browser.find_element_by_xpath('//*[@id="divquestion3"]/ul/li[6]/a')
-browser.execute_script("arguments[0].click();", user_speciality_radio)
-# user_speciality_radio.click()
+# browser.execute_script("arguments[0].click();", user_speciality_radio)
+user_speciality_radio.click()
 
 user_condition_check = browser.find_element_by_xpath('//*[@id="divquestion4"]/ul/li[5]/a')
 user_condition_check.click()
@@ -54,3 +60,10 @@ submit.click()
 browser.find_element_by_xpath("//button[text()='确认']").click()
 # 再点智能验证提示框，进行智能验证
 browser.find_element_by_xpath("//div[@id='captcha']").click()
+
+
+element = WebDriverWait(browser, 10).until(
+    EC.visibility_of_element_located((By.ID, "divTab"))
+)
+
+browser.quit()
