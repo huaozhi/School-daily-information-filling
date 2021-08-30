@@ -1,0 +1,8 @@
+# 姓名
+name: 张三
+# 学号
+num: 123
+# 地址
+adress: '地址'
+# 体温
+temperature: 36.5

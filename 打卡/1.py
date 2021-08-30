@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import yaml
 
 
 url = 'https://www.wjx.cn/vj/exuVsAI.aspx'
@@ -21,11 +21,16 @@ browser.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': 'Obj
 
 
 browser.get(url)
-user_name = "胡澳治"
-user_num = "201900800510"
-user_house = "江西省九江市修水县万象新城B区1301"
-user_tmp = '36.5'
-user_speciality = "19计算机科学"
+f = open("个人信息.yml","r",encoding="utf-8")
+content = f.read()
+# 转换成字典读出来
+result = yaml.load(content, yaml.FullLoader)
+user_name = result['name']
+user_num = result['num']
+user_house = result['adress']
+user_tmp = str(result['temperature'])
+
+
 user_name_input = browser.find_element_by_id("q1")
 user_name_input.send_keys(user_name)
 
@@ -67,3 +72,4 @@ element = WebDriverWait(browser, 10).until(
 )
 
 browser.quit()
+
